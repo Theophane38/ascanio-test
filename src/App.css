@@ -18,14 +18,20 @@
 .searchCity .listMatchingCities {
   width: 300px;
   max-height: 300px;
-  background-color: #ddd;
   border: 1px solid #ccc;
+  background-color: #fff;
   overflow-y: auto;
+  position: absolute;
+  z-index: 2;
 }
 .searchCity .listMatchingCities .item {
   padding: 5px;
   cursor: pointer;
 }
 .searchCity .listMatchingCities .item:hover {
-  background-color: #ccc;
+  background-color: #ddd;
+}
+
+.detailsCity {
+  border: 1px solid #ccc;
 }
