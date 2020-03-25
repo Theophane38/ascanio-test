@@ -12,3 +12,20 @@
   border: 1px solid black;
   text-align: center;
 }
+.searchCity input {
+  width: 300px;
+}
+.searchCity .listMatchingCities {
+  width: 300px;
+  max-height: 300px;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  overflow-y: scroll;
+}
+.searchCity .listMatchingCities .item {
+  padding: 5px;
+}
+.searchCity .listMatchingCities .item:hover {
+  background-color: #ccc;
+  color: red;
+}

@@ -28,8 +28,7 @@ class Home extends React.Component {
             )
         }
         return (
-            <div className="container">
-                <h1>Geo</h1>
+            <div>
                 <table>
                     <thead>
                         <tr>

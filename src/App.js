@@ -8,7 +8,7 @@ class  App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      currentPage: 'home',
+      currentPage: 'createCity',
       cities: [
        
       ]
@@ -24,6 +24,7 @@ class  App extends React.Component {
   render (){
     return(
       <div className="App">
+        <h1>GEO</h1>
         <div className="container">
           {this.state.currentPage === 'home'? <Home switchPage={() => this.switchPage()} cities={this.state.cities}/> : <CreateCity/>}
         </div>
