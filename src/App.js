@@ -1,16 +1,49 @@
 import React from 'react';
 import './App.css';
 import Home from './components/home'
-import CreateCity from './components/createCity';
+import CreateCity from './components/createArea';
 
 class  App extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
-      currentPage: 'createCity',
-      cities: [
-       
+      currentPage: 'createArea',
+      areas: [
+        {
+          name: 'Test',
+          cities: [
+            {
+              name: 'Grenoble',
+              images: ['','','','','']
+            },
+            {
+              name: 'Paris',
+              images: ['','','','','']
+            },
+            {
+              name: 'Lyon',
+              images: ['','','','','']
+            }
+          ]
+        },
+        {
+          name: 'Test2',
+          cities: [
+            {
+              name: 'Grenoble',
+              images: ['','','','','']
+            },
+            {
+              name: 'Paris',
+              images: ['','','','','']
+            },
+            {
+              name: 'Lyon',
+              images: ['','','','','']
+            }
+          ]
+        }
       ]
     }
   }
@@ -26,7 +59,7 @@ class  App extends React.Component {
       <div className="App">
         <h1>GEO</h1>
         <div className="container">
-          {this.state.currentPage === 'home'? <Home switchPage={() => this.switchPage()} cities={this.state.cities}/> : <CreateCity/>}
+          {this.state.currentPage === 'home'? <Home switchPage={() => this.switchPage()} areas={this.state.areas}/> : <CreateCity/>}
         </div>
       </div>
     )

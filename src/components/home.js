@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemCitiesList from './itemCitiesList'
+import ItemAreaList from './itemAreaList'
 
 class Home extends React.Component {
 
@@ -12,27 +12,28 @@ class Home extends React.Component {
     }
 
     render(){
-        let {cities} = this.props
+        let {areas} = this.props
         let myList = []
-        if (cities.length > 0){
-            for(let i = 0; i < cities.length; i++) {
+        if (areas.length > 0){
+            for(let i = 0; i < areas.length; i++) {
                 myList.push(
-                    <ItemCitiesList city={cities[i]}/>
+                    <ItemAreaList area={areas[i]}/>
                 )
             }
         } else {
             myList.push(
                 <tr>
-                    <td colSpan={4}>Vous n'avez créé aucune ville.</td>
+                    <td colSpan={5}>Vous n'avez créé aucune zone.</td>
                 </tr>
             )
         }
         return (
-            <div>
-                <table>
+            <div className="home">
+                <table cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
-                            <td>Nom de la ville</td>
+                            <td>Nom de la zone</td>
+                            <td>Villes</td>
                             <td>Afficher</td>
                             <td>Modifier</td>
                             <td>Supprimer</td>
@@ -42,7 +43,7 @@ class Home extends React.Component {
                         {myList}
                     </tbody>
                 </table>
-                <button onClick={() => this.props.switchPage('createCity')}>Ajouter une ville</button>
+                <button className="createAreaButton" onClick={() => this.props.switchPage('createCity')}>Créer une zone</button>
             </div>
         )
     }

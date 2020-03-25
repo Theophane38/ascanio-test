@@ -2,7 +2,7 @@ import React from 'react';
 import DynamicCitySearch from './dynamicCitySearch'
 import CityDetails from './cityDetails'
 
-class CreateCity extends React.Component {
+class CreateArea extends React.Component {
 
     constructor(props){
         super(props)
@@ -33,17 +33,18 @@ class CreateCity extends React.Component {
             )
         }
         return (
-            <div>
+            <div className="createArea">
                 <h3>Création d'une zone</h3>
                 <p>Nom de la zone</p>
                 <input type="text"/>
                 <p>Ville</p>
                 {this.state.selectedCities.length < 3? <DynamicCitySearch addCity={this.addCity} focusedSearchBar={this.setFocus}/> : ''}
                 {selectedCitiesList}
+                <button>Annuler</button>
                 {this.state.selectedCities.length > 0? <button>Sauvegarder</button>: ''}
             </div>
         )
     }
 } 
 
-export default CreateCity;
+export default CreateArea;
