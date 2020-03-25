@@ -1,0 +1,14 @@
+.App {
+
+}
+.App .container {
+  width: 1000px;
+  margin: auto;
+}
+.App table {
+  width: 100%;
+}
+.App table tr td {
+  border: 1px solid black;
+  text-align: center;
+}
