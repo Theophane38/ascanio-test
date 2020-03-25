@@ -9,6 +9,7 @@ class CreateCity extends React.Component {
             allCities: ''
         }
         this.handleChange = this.handleChange.bind(this);
+        this.setSearchvalue = this.setSearchvalue.bind(this)
     }
 
     componentWillMount(){
@@ -30,15 +31,29 @@ class CreateCity extends React.Component {
         this.setState({
             valueSearchBar: event.target.value
         })
-        for (var i=0; i < this.state.allCities.length; i++) {
-            if (this.state.allCities[i].nom.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1) {
-                matchingCities.push(
-                    <div className="item">{this.state.allCities[i].nom}</div>
-                )
+        if (event.target.value.length > 2){
+            for (var i=0; i < this.state.allCities.length; i++) {
+                if (this.state.allCities[i].nom.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1) {
+                    let nameCurrentCity = this.state.allCities[i].nom
+                    matchingCities.push(
+                        <div className="item" onClick={() => this.setSearchvalue(nameCurrentCity)}>{nameCurrentCity}</div>
+                    )
+                }
             }
+            this.setState({
+                matchingCities
+            })
+        } else {
+            this.setState({
+                matchingCities: []
+            })
         }
+    }
+
+    setSearchvalue(value){
         this.setState({
-            matchingCities
+            valueSearchBar: value,
+            matchingCities: []
         })
     }
 
