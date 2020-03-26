@@ -1,5 +1,7 @@
 import React from 'react';
 import DynamicCitySearch from './dynamicCitySearch'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class CreateArea extends React.Component {
 
@@ -63,6 +65,23 @@ class CreateArea extends React.Component {
         event.preventDefault();
     }
 
+    removeCity(id){
+        let {area} = this.state
+        let cityName = area.cities[id]
+        console.log(area.images)
+        area.cities.splice(id, 1)
+        for (let i = 0; i < area.images.length; i++){
+            console.log(area.images[i].city)
+            if (area.images[i].city === cityName){
+                area.images.splice(i, 1)
+                i = -1
+            }
+        }
+        this.setState({
+            area,
+        })
+    }
+
     render(){
         let images = []
         let cities = []
@@ -75,7 +94,7 @@ class CreateArea extends React.Component {
         }
         for (let i = 0; i < this.state.area.cities.length; i++){
             cities.push(
-                <li>{this.state.area.cities[i]}</li>
+                <li>{this.state.area.cities[i]} <FontAwesomeIcon onClick={() => this.removeCity(i)} className="close" icon={faTimes}/></li>
             )
         }
         return (
