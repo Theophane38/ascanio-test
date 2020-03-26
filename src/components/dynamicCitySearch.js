@@ -37,7 +37,7 @@ class DynamicCitySearch extends React.Component {
                 if (this.state.allCities[i].nom.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1) {
                     let nameCurrentCity = this.state.allCities[i].nom
                     matchingCities.push(
-                        <div className="item" onClick={() => this.props.addCity(nameCurrentCity)}>{nameCurrentCity}</div>
+                        <div className="item" onClick={() => this.selectCity(nameCurrentCity)}>{nameCurrentCity}</div>
                     )
                 }
             }
@@ -49,6 +49,13 @@ class DynamicCitySearch extends React.Component {
                 matchingCities: []
             })
         }
+    }
+
+    selectCity(nameCurrentCity){
+        this.props.addCity(nameCurrentCity)
+        this.setState({
+            valueSearchBar: ''
+        })
     }
 
     setFocus(value){

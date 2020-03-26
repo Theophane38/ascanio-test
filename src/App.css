@@ -75,8 +75,30 @@
   padding: 5px;
   color: #fff;
 }
+.createArea ul {
+  padding: 0;
+  margin: 10px 0;
+}
+.createArea li {
+  display: inline-block;
+  padding: 3px 10px;
+  background-color: #2ac0cc;
+  margin: 0 10px;
+  color: #fff;
+  border-radius: 50px;
+
+}
+.createArea .imagesGrid {
+  line-height: 0;
+}
 .createArea .image {
-  width: 180px;
+  width: calc(20% - 4px);
   display: inline-block;
   cursor: pointer;
+  line-height: 0;
+  margin: 2px;
+}
+.createArea img {
+  line-height: 0;
+  width: 100%;
 }

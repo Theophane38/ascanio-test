@@ -15,9 +15,9 @@ class ItemAreaList extends React.Component {
         let {area} = this.props
         console.log(area.cities)
         let listCities = []
+        console.log(area.cities)
         for (let i = 0; i < area.cities.length; i++){
-            console.log(area.cities[i])
-            listCities.push(<li>{area.cities[i].name}</li>)
+            listCities.push(<li>{area.cities[i]}</li>)
         }
         return (
             <tr>

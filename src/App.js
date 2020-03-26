@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Home from './components/home'
-import CreateCity from './components/createArea';
+import CreateArea from './components/createArea';
 
 class  App extends React.Component {
 
@@ -12,40 +12,34 @@ class  App extends React.Component {
       areas: [
         {
           name: 'Test',
-          cities: [
+          cities: ['Grenoble'],
+          images: [
             {
-              name: 'Grenoble',
-              images: ['','','','','']
+              city: 'Grenoble',
+              url: ''
             },
             {
-              name: 'Paris',
-              images: ['','','','','']
+              city: 'Grenoble',
+              url: ''
             },
             {
-              name: 'Lyon',
-              images: ['','','','','']
-            }
+              city: 'Grenoble',
+              url: ''
+            },
+            {
+              city: 'Grenoble',
+              url: ''
+            },
+            {
+              city: 'Grenoble',
+              url: ''
+            },
           ]
         },
-        {
-          name: 'Test2',
-          cities: [
-            {
-              name: 'Grenoble',
-              images: ['','','','','']
-            },
-            {
-              name: 'Paris',
-              images: ['','','','','']
-            },
-            {
-              name: 'Lyon',
-              images: ['','','','','']
-            }
-          ]
-        }
       ]
     }
+    this.switchPage = this.switchPage.bind(this)
+    this.addArea = this.addArea.bind(this)
   }
 
   switchPage(page){
@@ -54,12 +48,22 @@ class  App extends React.Component {
     })
   }
 
+  addArea(area){
+    console.log(area)
+    let {areas} = this.state
+    areas.push(area)
+    this.setState({
+      area,
+      currentPage: 'home'
+    })
+  }
+
   render (){
     return(
       <div className="App">
         <h1>GEO</h1>
         <div className="container">
-          {this.state.currentPage === 'home'? <Home switchPage={() => this.switchPage()} areas={this.state.areas}/> : <CreateCity/>}
+          {this.state.currentPage === 'home'? <Home switchPage={this.switchPage} areas={this.state.areas}/> : <CreateArea addArea={this.addArea}/>}
         </div>
       </div>
     )
