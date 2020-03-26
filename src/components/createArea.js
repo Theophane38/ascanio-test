@@ -13,6 +13,7 @@ class CreateArea extends React.Component {
                 cities: [],
                 images: []
             },
+            modalCancel: false
         }
         this.addCity = this.addCity.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -82,6 +83,12 @@ class CreateArea extends React.Component {
         })
     }
 
+    openModalCancel(value){
+        this.setState({
+            modalCancel: value
+        })
+    }
+
     render(){
         let images = []
         let cities = []
@@ -109,8 +116,15 @@ class CreateArea extends React.Component {
                 <div className="imagesGrid">
                     {images}
                 </div>
-                <button>Annuler</button>
+                <button onClick={() => this.openModalCancel(true)}>Annuler</button>
                 {this.state.area.cities.length > 0? <button onClick={() => this.props.addArea(this.state.area)}>Sauvegarder</button>: ''}
+                <div className={`modalBackGround  ${this.state.modalCancel? 'active' : ''}`}>
+                    <div className="modal">
+                        <p>Êtes-vous sûr ?</p>
+                        <button onClick={() => this.props.switchPage('home')}>Oui</button>
+                        <button onClick={() => this.openModalCancel(false)}>Non</button>
+                    </div>
+                </div>
             </div>
         )
     }

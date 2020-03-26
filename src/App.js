@@ -63,7 +63,7 @@ class  App extends React.Component {
       <div className="App">
         <h1>GEO</h1>
         <div className="container">
-          {this.state.currentPage === 'home'? <Home switchPage={this.switchPage} areas={this.state.areas}/> : <CreateArea addArea={this.addArea}/>}
+          {this.state.currentPage === 'home'? <Home switchPage={this.switchPage} areas={this.state.areas}/> : <CreateArea switchPage={this.switchPage} addArea={this.addArea}/>}
         </div>
       </div>
     )
