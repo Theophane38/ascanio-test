@@ -8,7 +8,7 @@ class  App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      currentPage: 'createArea',
+      currentPage: 'home',
       areas: [
         {
           name: 'Test',

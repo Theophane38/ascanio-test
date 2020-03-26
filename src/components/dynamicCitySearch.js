@@ -57,7 +57,7 @@ class DynamicCitySearch extends React.Component {
                 focusedSearchBar: value
             })
             console.log(value)
-        }, 100);
+        }, 500);
     }
 
     render(){

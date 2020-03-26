@@ -39,6 +39,10 @@
   border-radius: 10px;
   cursor: pointer;
 }
+.createAreaButton:hover {
+  text-shadow: 2px 2px 4px #fff;
+  transition: 0.3s;
+}
 .searchCity input {
   width: 300px;
 }
@@ -70,4 +74,9 @@
   margin: 0;
   padding: 5px;
   color: #fff;
+}
+.createArea .image {
+  width: 180px;
+  display: inline-block;
+  cursor: pointer;
 }
