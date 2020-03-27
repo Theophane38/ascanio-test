@@ -1,5 +1,6 @@
 import React from 'react';
 import ItemAreaList from './itemAreaList'
+import {Link} from "react-router-dom"
 
 class Home extends React.Component {
 
@@ -7,17 +8,14 @@ class Home extends React.Component {
         super(props)
     }
 
-    componentWillMount(){
-
-    }
-
     render(){
         let {areas} = this.props
         let myList = []
+
         if (areas.length > 0){
             for(let i = 0; i < areas.length; i++) {
                 myList.push(
-                    <ItemAreaList area={areas[i]}/>
+                    <ItemAreaList id={i} editArea={this.props.editArea} area={areas[i]}/>
                 )
             }
         } else {
@@ -27,6 +25,7 @@ class Home extends React.Component {
                 </tr>
             )
         }
+
         return (
             <div className="home">
                 <table cellspacing="0" cellpadding="0">
@@ -43,7 +42,9 @@ class Home extends React.Component {
                         {myList}
                     </tbody>
                 </table>
-                <button className="createAreaButton" onClick={() => this.props.switchPage('createCity')}>Créer une zone</button>
+                <Link to="/createArea">
+                    <button className="createAreaButton">Créer une zone</button>
+                </Link>
             </div>
         )
     }

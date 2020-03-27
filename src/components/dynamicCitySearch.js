@@ -17,7 +17,6 @@ class DynamicCitySearch extends React.Component {
         fetch('https://geo.api.gouv.fr/communes')
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             this.setState({
                 allCities: data
             })

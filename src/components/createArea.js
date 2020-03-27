@@ -2,6 +2,7 @@ import React from 'react';
 import DynamicCitySearch from './dynamicCitySearch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import {Link, withRouter} from "react-router-dom"
 
 class CreateArea extends React.Component {
 
@@ -19,6 +20,14 @@ class CreateArea extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.drag = this.drag.bind(this)
         this.drop = this.drop.bind(this)
+    }
+
+    componentWillMount(){
+        if (typeof this.props.currentArea !== 'undefined'){
+            this.setState({
+                area: this.props.currentArea
+            })
+        }
     }
 
     addCity(value){
@@ -89,9 +98,16 @@ class CreateArea extends React.Component {
         })
     }
 
+    saveArea(){
+        this.props.addArea(this.state.area, this.props.idCurrentArea)
+        this.props.history.push('/')
+    }
+
     render(){
+        console.log(this.props)
         let images = []
         let cities = []
+
         for (let i = 0; i < this.state.area.images.length; i++){
             images.push(
                 <div className="image" onDrop={this.drop} onDragOver={this.allowDrop}>
@@ -99,6 +115,7 @@ class CreateArea extends React.Component {
                 </div>
             )
         }
+        
         for (let i = 0; i < this.state.area.cities.length; i++){
             cities.push(
                 <li>{this.state.area.cities[i]} <FontAwesomeIcon onClick={() => this.removeCity(i)} className="close" icon={faTimes}/></li>
@@ -117,11 +134,13 @@ class CreateArea extends React.Component {
                     {images}
                 </div>
                 <button onClick={() => this.openModalCancel(true)}>Annuler</button>
-                {this.state.area.cities.length > 0? <button onClick={() => this.props.addArea(this.state.area)}>Sauvegarder</button>: ''}
+                {this.state.area.cities.length > 0? <button onClick={() => this.saveArea()}>Sauvegarder</button>: ''}
                 <div className={`modalBackGround  ${this.state.modalCancel? 'active' : ''}`}>
                     <div className="modal">
                         <p>Êtes-vous sûr ?</p>
-                        <button onClick={() => this.props.switchPage('home')}>Oui</button>
+                        <Link to="/">
+                            <button>Oui</button>
+                        </Link>
                         <button onClick={() => this.openModalCancel(false)}>Non</button>
                     </div>
                 </div>
@@ -130,4 +149,4 @@ class CreateArea extends React.Component {
     }
 } 
 
-export default CreateArea;
+export default withRouter(CreateArea);
