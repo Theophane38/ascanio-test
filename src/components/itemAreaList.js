@@ -8,10 +8,9 @@ class ItemAreaList extends React.Component {
     constructor(props){
         super(props)
     }
-    
+
     edit(){
-        this.props.editArea(this.props.area, this.props.id)
-        this.props.history.push('/editArea')
+        this.props.history.push('/editArea/' + this.props.id)
     }
 
     render(){
@@ -32,7 +31,7 @@ class ItemAreaList extends React.Component {
                 </td>
                 <td><button>Afficher</button></td>
                 <td><button onClick={() => this.edit()}>Modifier</button></td>
-                <td><button>supprimer</button></td>
+                <td><button onClick={() => this.props.deleteArea(this.props.id)}>supprimer</button></td>
             </tr>
         )
     }

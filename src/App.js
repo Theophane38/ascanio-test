@@ -1,33 +1,27 @@
 import React from 'react';
 import './App.css';
 import Home from './components/home'
-import CreateArea from './components/createArea';
+import CreateArea from './components/createArea'
+import Modal from './components/modal'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  Link
 } from "react-router-dom";
 
-class  App extends React.Component {
+class App extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
-      currentPage: 'home',
-      areas: []
+      areas: [{
+        name: 'a',
+        cities: ['b'],
+        images: []
+      }]
     }
-    this.editArea = this.editArea.bind(this)
     this.addArea = this.addArea.bind(this)
-  }
-
-  switchPage(page, area, id){
-    this.setState({
-      currentPage: page,
-      currentArea: area,
-      idCurrentArea: id
-    })
+    this.deleteArea = this.deleteArea.bind(this)
   }
 
   addArea(area, id){
@@ -41,17 +35,22 @@ class  App extends React.Component {
       areas,
     })
   }
+  
 
-  editArea(tempArea, idTempArea){
+  deleteArea(id){
+    let {areas} = this.state
+    areas.splice(id, 1)
     this.setState({
-      currentArea: tempArea,
-      idCurrentArea: idTempArea
+      areas
     })
   }
 
   render (){
     return(
       <Router>
+        {/* <Modal>
+          <p>Salut</p>
+        </Modal> */}
         <div className="App">
           <h1>GEO</h1>
           <div className="container">
@@ -59,21 +58,19 @@ class  App extends React.Component {
             <Route exact path="/">
               <Home 
                 editArea={this.editArea}
+                deleteArea={this.deleteArea}
                 areas={this.state.areas}
               />
             </Route>
             <Route exact path="/createArea">
               <CreateArea 
-                switchPage={this.switchPage}
                 addArea={this.addArea}
               />
             </Route>
-            <Route exact path="/editArea">
+            <Route exact path="/editArea/:id">
               <CreateArea 
-                switchPage={this.switchPage}
                 addArea={this.addArea}
-                currentArea={this.state.currentArea}
-                idCurrentArea={this.state.idCurrentArea}
+                initialAreas={this.state.areas}
               />
             </Route>
           </Switch>

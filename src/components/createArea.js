@@ -2,19 +2,19 @@ import React from 'react';
 import DynamicCitySearch from './dynamicCitySearch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import {Link, withRouter} from "react-router-dom"
+import {Link, withRouter, useParams} from "react-router-dom"
 
 class CreateArea extends React.Component {
 
-    constructor(props){
-        super(props)
+    constructor(){
+        super()
         this.state = {
             area: {
                 name: '',
                 cities: [],
                 images: []
             },
-            modalCancel: false
+            modalCancel: false,
         }
         this.addCity = this.addCity.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -23,15 +23,26 @@ class CreateArea extends React.Component {
     }
 
     componentWillMount(){
-        if (typeof this.props.currentArea !== 'undefined'){
-            this.setState({
-                area: this.props.currentArea
-            })
+        if (typeof this.props.match.params.id !== 'undefined'){
+            if (typeof this.props.initialAreas[this.props.match.params.id] !== 'undefined'){
+                const a = Object.assign({}, this.props.initialAreas[0])
+                let area = {}
+                area.name = a.name
+                area.cities = a.cities.slice(0)
+                area.images = a.images.slice(0)
+                console.log(this.props.initialAreas)
+                this.setState({
+                    area
+                })
+            } else {
+                this.props.history.push('/')
+            }
         }
     }
 
     addCity(value){
-        let {area} = this.state
+        console.log(this.props.initialAreas)
+        let area = this.state.area
         area.cities.push(value)
         for (let i = 0; i < 5; i++){
             area.images.push(
@@ -78,7 +89,7 @@ class CreateArea extends React.Component {
     removeCity(id){
         let {area} = this.state
         let cityName = area.cities[id]
-        console.log(area.images)
+
         area.cities.splice(id, 1)
         for (let i = 0; i < area.images.length; i++){
             console.log(area.images[i].city)
@@ -87,6 +98,7 @@ class CreateArea extends React.Component {
                 i = -1
             }
         }
+
         this.setState({
             area,
         })
@@ -99,12 +111,11 @@ class CreateArea extends React.Component {
     }
 
     saveArea(){
-        this.props.addArea(this.state.area, this.props.idCurrentArea)
+        this.props.addArea(this.state.area, this.props.match.params.id)
         this.props.history.push('/')
     }
 
     render(){
-        console.log(this.props)
         let images = []
         let cities = []
 
@@ -121,6 +132,7 @@ class CreateArea extends React.Component {
                 <li>{this.state.area.cities[i]} <FontAwesomeIcon onClick={() => this.removeCity(i)} className="close" icon={faTimes}/></li>
             )
         }
+
         return (
             <div className="createArea">
                 <h3>Création d'une zone</h3>

@@ -15,7 +15,11 @@ class Home extends React.Component {
         if (areas.length > 0){
             for(let i = 0; i < areas.length; i++) {
                 myList.push(
-                    <ItemAreaList id={i} editArea={this.props.editArea} area={areas[i]}/>
+                    <ItemAreaList id={i} 
+                        editArea={this.props.editArea}
+                        deleteArea={this.props.deleteArea}
+                        area={areas[i]}
+                    />
                 )
             }
         } else {
@@ -42,9 +46,9 @@ class Home extends React.Component {
                         {myList}
                     </tbody>
                 </table>
-                <Link to="/createArea">
-                    <button className="createAreaButton">Créer une zone</button>
-                </Link>
+                <button className="createAreaButton">
+                    <Link to="/createArea">Créer une zone</Link>
+                </button>
             </div>
         )
     }
