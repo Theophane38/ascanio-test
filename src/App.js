@@ -7,6 +7,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Link
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -22,7 +23,9 @@ class App extends React.Component {
     }
     this.addArea = this.addArea.bind(this)
     this.deleteArea = this.deleteArea.bind(this)
+    this.openModalCancel = this.openModalCancel.bind(this)
   }
+  
 
   addArea(area, id){
     let {areas} = this.state
@@ -45,6 +48,20 @@ class App extends React.Component {
     })
   }
 
+  openModalCancel(value){
+    console.log(value)
+    this.setState({
+        modalCancel: value
+    })
+  }
+
+  discarArea(){
+    localStorage.clear();
+    this.setState({
+      modalCancel: false
+  })
+  }
+
   render (){
     return(
       <Router>
@@ -65,15 +82,26 @@ class App extends React.Component {
             <Route exact path="/createArea">
               <CreateArea 
                 addArea={this.addArea}
+                openModalCancel={this.openModalCancel}
               />
             </Route>
             <Route exact path="/editArea/:id">
               <CreateArea 
                 addArea={this.addArea}
                 initialAreas={this.state.areas}
+                openModalCancel={this.openModalCancel}
               />
             </Route>
           </Switch>
+          </div>
+          <div className={`modalBackGround  ${this.state.modalCancel? 'active' : ''}`}>
+            <div className="modal">
+                <p>Êtes-vous sûr de vouloir surpprimer cette zone?</p>
+                <Link to="/">
+                    <button onClick={() => this.discarArea(false)}>Oui</button>
+                </Link>
+                <button onClick={() => this.openModalCancel(false)}>Non</button>
+            </div>
           </div>
         </div>
       </Router>

@@ -25,9 +25,9 @@ class CreateArea extends React.Component {
     }
 
     componentWillMount(){
-        if (typeof this.props.match.params.id !== 'undefined'){
+        if (this.props.match.path !== '/createArea'){
             if (typeof this.props.initialAreas[this.props.match.params.id] !== 'undefined'){
-                const a = Object.assign({}, this.props.initialAreas[0])
+                const a = Object.assign({}, this.props.initialAreas[this.props.match.params.id])
                 let area = {}
                 area.name = a.name
                 area.cities = a.cities.slice(0)
@@ -39,6 +39,11 @@ class CreateArea extends React.Component {
             } else {
                 this.props.history.push('/')
             }
+        } else if (localStorage.getItem('currentArea') !== null){
+            console.log(localStorage.getItem('currentArea'))
+            this.setState({
+                area: JSON.parse(localStorage.getItem('currentArea'))
+            })
         }
     }
 
@@ -58,6 +63,7 @@ class CreateArea extends React.Component {
             matchingCities: [],
             area
         })
+        localStorage.setItem('currentArea', JSON.stringify(area))
     }
 
     handleChangeTitle(event){
@@ -66,6 +72,7 @@ class CreateArea extends React.Component {
         this.setState({
             area
         })
+        localStorage.setItem('currentArea', JSON.stringify(area))
     }
 
     handleChangeDescription(event){
@@ -74,6 +81,7 @@ class CreateArea extends React.Component {
         this.setState({
             area
         })
+        localStorage.setItem('currentArea', JSON.stringify(area))
     }
 
     
@@ -90,6 +98,7 @@ class CreateArea extends React.Component {
             area,
             switchedImage: event.target.id
         })
+        localStorage.setItem('currentArea', JSON.stringify(area))
     }
 
     allowDrop(event){
@@ -112,12 +121,7 @@ class CreateArea extends React.Component {
         this.setState({
             area,
         })
-    }
-
-    openModalCancel(value){
-        this.setState({
-            modalCancel: value
-        })
+        localStorage.setItem('currentArea', JSON.stringify(area))
     }
 
     saveArea(){
@@ -174,17 +178,8 @@ class CreateArea extends React.Component {
                 <div className="imagesGrid">
                     {images}
                 </div>
-                <button className="cancelButton" onClick={() => this.openModalCancel(true)}>Annuler</button>
+                <button className="cancelButton" onClick={() => this.props.openModalCancel(true)}>Supprimer</button>
                 {this.state.area.cities.length > 0? <button  className="saveButton" onClick={() => this.saveArea()}>Sauvegarder</button>: ''}
-                <div className={`modalBackGround  ${this.state.modalCancel? 'active' : ''}`}>
-                    <div className="modal">
-                        <p>Êtes-vous sûr ?</p>
-                        <Link to="/">
-                            <button>Oui</button>
-                        </Link>
-                        <button onClick={() => this.openModalCancel(false)}>Non</button>
-                    </div>
-                </div>
             </div>
         )
     }
