@@ -7,47 +7,46 @@ class DynamicCitySearch extends React.Component {
         this.state = {
             valueSearchBar: '',
             allCities: '',
-            selectedCities: []
+            selectedCities: [],
+            matchingCities: []
         }
         this.handleChange = this.handleChange.bind(this)
         this.setFocus = this.setFocus.bind(this)
     }
 
     componentWillMount(){
-        fetch('https://geo.api.gouv.fr/communes')
+
+    }
+
+    handleChange(event){
+        const matchingCities = []
+        let value = event.target.value
+        this.setState({
+            valueSearchBar: value
+        })
+        console.log(matchingCities)
+        fetch(`https://geo.api.gouv.fr/communes?fields=nom,population&boost=population&nom=${value}`)
         .then(response => response.json())
         .then(data => {
+            let nbOptions
+            if (data.length > 5){
+                nbOptions = 5
+            } else {
+                nbOptions = data.length
+            }
+            for (var i=0; i < nbOptions; i++) {
+                if (!this.props.cities.includes(data[i].nom)){
+                    matchingCities.push(data[i].nom)
+                }
+            }
+            console.log(matchingCities)
             this.setState({
-                allCities: data
+                matchingCities
             })
         })
         .catch(error => {
             console.log(error)
         });
-    }
-
-    handleChange(event){
-        let matchingCities = []
-        this.setState({
-            valueSearchBar: event.target.value
-        })
-        if (event.target.value.length > 2){
-            for (var i=0; i < this.state.allCities.length; i++) {
-                if (this.state.allCities[i].nom.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1) {
-                    let nameCurrentCity = this.state.allCities[i].nom
-                    matchingCities.push(
-                        <div className="item" onClick={() => this.selectCity(nameCurrentCity)}>{nameCurrentCity}</div>
-                    )
-                }
-            }
-            this.setState({
-                matchingCities
-            })
-        } else {
-            this.setState({
-                matchingCities: []
-            })
-        }
     }
 
     selectCity(nameCurrentCity){
@@ -66,13 +65,19 @@ class DynamicCitySearch extends React.Component {
     }
 
     render(){
+        let optionsCities = []
+        for (let i = 0; i < this.state.matchingCities.length; i++){
+            optionsCities.push(
+                <div className="item" onClick={() => this.selectCity(this.state.matchingCities[i])}>{this.state.matchingCities[i]}</div>
+            )
+        }
         return (
             <form>
                 <div class="searchCity">
                     <input onFocus={() => this.setFocus(true)}  onBlur={() => this.setFocus(false)} placeHolder='Ville' value={this.state.valueSearchBar} onChange={this.handleChange}/>
                     
                     {this.state.focusedSearchBar? <div className="listMatchingCities">
-                        {this.state.matchingCities}
+                        {optionsCities}
                     </div> : ''}
                 </div>
             </form>

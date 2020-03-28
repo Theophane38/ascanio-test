@@ -52,7 +52,7 @@ class App extends React.Component {
           <p>Salut</p>
         </Modal> */}
         <div className="App">
-          <h1>GEO</h1>
+          <h1><span>Pimp</span><span>My</span><span>Zone</span></h1>
           <div className="container">
           <Switch>
             <Route exact path="/">

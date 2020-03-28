@@ -1,9 +1,27 @@
+@font-face {
+  font-family: 'JosefinSans';
+  src: url('./fonts/JosefinSans-VariableFont_wght.ttf');
+}
 .App {
-
+  font-family: 'Roboto', sans-serif;
+}
+.App h1 {
+  font-family: 'JosefinSans', sans-serif;
+  margin: 5px;
+}
+.App h1 span:first-child{
+  color: #2ac0cc;
+}
+.App h1 span:nth-child(2){
+  font-size: 15px;
+}
+.App h1 span:last-child{
+  color: #fabb3a;
 }
 .App .container {
   width: 1000px;
   margin: auto;
+  margin-top: 100px;;
 }
 .App table {
   width: 100%;
@@ -54,6 +72,7 @@
   width: 300px;
   max-height: 300px;
   border: 1px solid #ccc;
+  border-top: none;
   background-color: #fff;
   overflow-y: auto;
   position: absolute;
@@ -71,13 +90,12 @@
   border: 1px solid #ccc;
 }
 .createArea {
-  border: 1px solid #ddd;
+  padding-bottom: 75px;
+  position: relative;
 }
 .createArea h3 {
-  background-color: #2ac0cc;
   margin: 0;
-  padding: 5px;
-  color: #fff;
+  font-size: 30px;
 }
 .createArea ul {
   padding: 0;
@@ -109,13 +127,46 @@
 .createArea .image {
   width: calc(20% - 4px);
   display: inline-block;
-  cursor: pointer;
+  cursor: grab;
   line-height: 0;
   margin: 2px;
+}
+.createArea .image:active {
+  cursor: grabbing;
 }
 .createArea img {
   line-height: 0;
   width: 100%;
+}
+.createArea .cancelButton {
+  position: absolute;
+  left: 0px;
+  bottom: 20px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.createArea .cancelButton:hover {
+  background-color: #bbb;
+  transition: 0.3s;
+}
+.createArea .saveButton {
+  position: absolute;
+  right: 0px;
+  bottom: 20px;
+  background-color: #fabb3a;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.createArea .saveButton:hover {
+  background-color: #EEB339;
+  transition: 0.3s;
 }
 .modalBackGround {
   display: none;
@@ -139,4 +190,31 @@
   padding: 10px 0;
   background-color: #fff;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+.containerForm {
+  padding: 30px 0;
+}
+.containerForm p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.containerForm input {
+  padding: 10px;
+  width: 300px;
+  border: #ccc solid 0.5px;
+}
+.containerForm input:focus {
+  border: #2ac0cc solid 0.5px;
+}
+.containerForm textarea {
+  padding: 10px;
+  font-family: roboto;
+  width: 600px;
+  height: 200px;
+  border: #ccc solid 0.5px;
+}
+.containerForm textarea:focus {
+  border: #2ac0cc solid 0.5px;
 }

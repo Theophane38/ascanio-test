@@ -17,7 +17,9 @@ class CreateArea extends React.Component {
             modalCancel: false,
         }
         this.addCity = this.addCity.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChangeTitle = this.handleChangeTitle.bind(this)
+        this.handleChangeDescription = this.handleChangeDescription.bind(this)
+        .bind(this)
         this.drag = this.drag.bind(this)
         this.drop = this.drop.bind(this)
     }
@@ -58,9 +60,17 @@ class CreateArea extends React.Component {
         })
     }
 
-    handleChange(event){
+    handleChangeTitle(event){
         let {area} = this.state
         area.name = event.target.value
+        this.setState({
+            area
+        })
+    }
+
+    handleChangeDescription(event){
+        let {area} = this.state
+        area.descrption = event.target.value
         this.setState({
             area
         })
@@ -144,17 +154,28 @@ class CreateArea extends React.Component {
         return (
             <div className="createArea">
                 <h3>Création d'une zone</h3>
-                <p>Nom de la zone</p>
-                <input type="text" value={this.state.area.name} onChange={this.handleChange}/>
-                <ul>
-                    {cities}
-                </ul>
-                {this.state.area.cities.length < 3? <DynamicCitySearch addCity={this.addCity} focusedSearchBar={this.setFocus}/> : ''}
+                <div className="containerForm">
+                    <p>Nom de la zone</p>
+                    <input type="text" value={this.state.area.name} placeholder="Entrez le nom de votre zone" onChange={this.handleChangeTitle}/>
+                </div>
+                <div className="containerForm">
+                    <p>Description</p>
+                    <textarea placeholder="Décrivez votre zone en quelques phrases..." onChange={this.handleChangeDescription}>
+                        {this.state.area.descrption}
+                    </textarea>
+                </div>
+                <div className="containerForm">
+                    <p>Villes</p>
+                    <ul>
+                        {cities}
+                    </ul>
+                    {this.state.area.cities.length < 3? <DynamicCitySearch cities={this.state.area.cities} addCity={this.addCity} focusedSearchBar={this.setFocus}/> : ''}
+                </div>
                 <div className="imagesGrid">
                     {images}
                 </div>
-                <button onClick={() => this.openModalCancel(true)}>Annuler</button>
-                {this.state.area.cities.length > 0? <button onClick={() => this.saveArea()}>Sauvegarder</button>: ''}
+                <button className="cancelButton" onClick={() => this.openModalCancel(true)}>Annuler</button>
+                {this.state.area.cities.length > 0? <button  className="saveButton" onClick={() => this.saveArea()}>Sauvegarder</button>: ''}
                 <div className={`modalBackGround  ${this.state.modalCancel? 'active' : ''}`}>
                     <div className="modal">
                         <p>Êtes-vous sûr ?</p>
