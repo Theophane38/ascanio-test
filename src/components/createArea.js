@@ -115,6 +115,14 @@ class CreateArea extends React.Component {
         this.props.history.push('/')
     }
 
+    onErrorImage(id){
+        let {area} = this.state
+        area.images[id].url = `https://i.picsum.photos/id/${Math.floor(Math.random() * 1085)}/180/180.jpg`
+        this.setState({
+            area
+        })
+    }
+
     render(){
         let images = []
         let cities = []
@@ -122,7 +130,7 @@ class CreateArea extends React.Component {
         for (let i = 0; i < this.state.area.images.length; i++){
             images.push(
                 <div className="image" onDrop={this.drop} onDragOver={this.allowDrop}>
-                    <img id={i} onDragStart={this.drag} src={this.state.area.images[i].url}/>
+                    <img id={i} onDragStart={this.drag} src={this.state.area.images[i].url} onError={() => this.onErrorImage(i)}/>
                 </div>
             )
         }
