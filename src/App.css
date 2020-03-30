@@ -23,6 +23,25 @@
   margin: auto;
   margin-top: 100px;;
 }
+.App .searchBar {
+  margin-bottom: 10px;;
+}
+.App .searchBar input {
+  vertical-align: top;
+  border: 1px solid #ccc;
+  padding: 2px
+}
+.App .searchBar input:focus {
+  border: 1px solid #fabb3a;
+  outline: none;
+}
+.App .searchBar svg {
+  background-color: #fabb3a;
+  padding: 3px 3px 2px 3px;
+  margin-left: -22px;
+  color: #fff;
+  vertical-align: text-bottom;
+}
 .App table {
   width: 100%;
   font-size: 12px;;
