@@ -56,6 +56,7 @@ class Home extends React.Component {
                 <div className="searchBar">
                     <input type='text' onChange={this.handleChangeSearch} placeholder="Chercher une zone"/><FontAwesomeIcon icon={faSearch}/>
                 </div>
+                <p onClick={() => this.props.generateRandomArea()}>Générer une zone aléatoire.</p>
                 <table cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>

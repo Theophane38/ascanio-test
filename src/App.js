@@ -25,6 +25,7 @@ class App extends React.Component {
     this.addArea = this.addArea.bind(this)
     this.deleteArea = this.deleteArea.bind(this)
     this.openModalCancel = this.openModalCancel.bind(this)
+    this.generateRandomArea = this.generateRandomArea.bind(this)
   }
   
 
@@ -60,7 +61,55 @@ class App extends React.Component {
     localStorage.clear();
     this.setState({
       modalCancel: false
-  })
+    })
+  }
+
+  getRandomWord(){
+    return fetch('https://random-word-api.herokuapp.com/word?number=1')
+    .then((response) => response.json())
+  }
+
+  getRandomParagraph(){
+    return fetch('https://baconipsum.com/api/?type=meat-and-filler&paras=1&format=text')
+    .then((response) => response.text())
+  }
+
+  getRandomCities(){
+    return fetch('https://geo.api.gouv.fr/communes?fields=nom')
+    .then((response) => response.json())
+  }
+
+  getRandomDatas(){
+    return Promise.all([this.getRandomWord(), this.getRandomParagraph(), this.getRandomCities()])
+  }
+
+  generateRandomArea(){
+    let {areas} = this.state
+    this.getRandomDatas()
+    .then(([responseWord, responseDescription, responseCities]) => {
+      let name = responseWord[0]
+      let description = responseDescription
+      let cities = []
+      let images = []
+      for (let i = 0; i < 3; i++){
+        let city = responseCities[Math.floor(Math.random() * responseCities.length)].nom
+        cities.push(city)
+        for (let j = 0; j < 5; j++){
+          images.push({
+            city,
+            url: `https://i.picsum.photos/id/${Math.floor(Math.random() * 1085)}/180/180.jpg`
+          })
+        }
+      }
+      let area = {
+        name,
+        description,
+        cities,
+        images: images
+      }
+      areas.push(area)
+      this.setState({areas})
+    })
   }
 
   render (){
@@ -76,6 +125,7 @@ class App extends React.Component {
             <Route exact path="/">
               <Home 
                 editArea={this.editArea}
+                generateRandomArea={this.generateRandomArea}
                 deleteArea={this.deleteArea}
                 areas={this.state.areas}
               />
