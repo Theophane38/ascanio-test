@@ -37,9 +37,9 @@ class Home extends React.Component {
                         <tr>
                             <td>Nom de la zone</td>
                             <td>Villes</td>
+                            <td>Description</td>
                             <td>Afficher</td>
-                            <td>Modifier</td>
-                            <td>Supprimer</td>
+                            <td>Actions</td>
                         </tr>
                     </thead>
                     <tbody>

@@ -16,8 +16,9 @@ class App extends React.Component {
     super(props)
     this.state = {
       areas: [{
-        name: 'a',
-        cities: ['b'],
+        name: 'Isère',
+        cities: ['Grenoble', 'Meylan', 'Saint Martin d\'Hères'],
+        description: 'Pellentesque sed tellus sed sapien auctor volutpat. Curabitur imperdiet ex tortor, in vulputate mi scelerisque nec. Quisque neque ex, ornare eu tempus id, pellentesque quis felis. Curabitur eget ultricies mi, non congue orci. Phasellus id augue eget libero finibus varius sit amet ac quam. Pellentesque ipsum eros, mattis sagittis mauris id, condimentum laoreet nibh. Proin porttitor, erat ut dapibus aliquet, odio sapien commodo tellus, eu tincidunt mi ex dapibus arcu. Nullam volutpat dui quis enim convallis bibendum. Cras egestas vitae elit sed dignissim. Phasellus non semper nulla. Sed id purus blandit, rhoncus libero accumsan, tristique ligula. Nulla fringilla nibh non pretium fermentum. Sed viverra, massa sed tempor egestas, elit arcu malesuada urna, ut fringilla lectus elit eget leo. Ut metus nisi, vulputate ut hendrerit eu, semper eu massa. Praesent fermentum sem et est scelerisque tincidunt. Praesent lacinia mattis gravida.        ',
         images: []
       }]
     }

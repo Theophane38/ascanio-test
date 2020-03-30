@@ -12,14 +12,14 @@ class CreateArea extends React.Component {
             area: {
                 name: '',
                 cities: [],
-                images: []
+                images: [],
+                description: ''
             },
             modalCancel: false,
         }
         this.addCity = this.addCity.bind(this)
         this.handleChangeTitle = this.handleChangeTitle.bind(this)
         this.handleChangeDescription = this.handleChangeDescription.bind(this)
-        .bind(this)
         this.drag = this.drag.bind(this)
         this.drop = this.drop.bind(this)
     }
@@ -27,12 +27,12 @@ class CreateArea extends React.Component {
     componentWillMount(){
         if (this.props.match.path !== '/createArea'){
             if (typeof this.props.initialAreas[this.props.match.params.id] !== 'undefined'){
-                const a = Object.assign({}, this.props.initialAreas[this.props.match.params.id])
+                const draftArea = Object.assign({}, this.props.initialAreas[this.props.match.params.id])
                 let area = {}
-                area.name = a.name
-                area.cities = a.cities.slice(0)
-                area.images = a.images.slice(0)
-                console.log(this.props.initialAreas)
+                area.name = draftArea.name
+                area.description = draftArea.description
+                area.cities = draftArea.cities.slice(0)
+                area.images = draftArea.images.slice(0)
                 this.setState({
                     area
                 })
@@ -63,7 +63,9 @@ class CreateArea extends React.Component {
             matchingCities: [],
             area
         })
-        localStorage.setItem('currentArea', JSON.stringify(area))
+        if (this.props.match.path === '/createArea'){
+            localStorage.setItem('currentArea', JSON.stringify(area))
+        }
     }
 
     handleChangeTitle(event){
@@ -72,16 +74,20 @@ class CreateArea extends React.Component {
         this.setState({
             area
         })
-        localStorage.setItem('currentArea', JSON.stringify(area))
+        if (this.props.match.path === '/createArea'){
+            localStorage.setItem('currentArea', JSON.stringify(area))
+        }
     }
 
     handleChangeDescription(event){
         let {area} = this.state
-        area.descrption = event.target.value
+        area.description = event.target.value
         this.setState({
             area
         })
-        localStorage.setItem('currentArea', JSON.stringify(area))
+        if (this.props.match.path === '/createArea'){
+            localStorage.setItem('currentArea', JSON.stringify(area))
+        }
     }
 
     
@@ -98,7 +104,9 @@ class CreateArea extends React.Component {
             area,
             switchedImage: event.target.id
         })
-        localStorage.setItem('currentArea', JSON.stringify(area))
+        if (this.props.match.path === '/createArea'){
+            localStorage.setItem('currentArea', JSON.stringify(area))
+        }
     }
 
     allowDrop(event){
@@ -121,11 +129,24 @@ class CreateArea extends React.Component {
         this.setState({
             area,
         })
-        localStorage.setItem('currentArea', JSON.stringify(area))
+        if (this.props.match.path === '/createArea'){
+            localStorage.setItem('currentArea', JSON.stringify(area))
+        }
+    }
+
+    cancelCreation(){
+        console.log(this.state.area.name, this.state.area.description, this.state.area.cities.length)
+        if (this.state.area.name === '' && this.state.area.description === '' && this.state.area.cities.length === 0){
+            console.log('a')
+            this.props.history.push('/')
+        } else {
+            this.props.openModalCancel(true)
+        }
     }
 
     saveArea(){
         this.props.addArea(this.state.area, this.props.match.params.id)
+        localStorage.clear()
         this.props.history.push('/')
     }
 
@@ -165,7 +186,7 @@ class CreateArea extends React.Component {
                 <div className="containerForm">
                     <p>Description</p>
                     <textarea placeholder="Décrivez votre zone en quelques phrases..." onChange={this.handleChangeDescription}>
-                        {this.state.area.descrption}
+                        {this.state.area.description}
                     </textarea>
                 </div>
                 <div className="containerForm">
@@ -178,7 +199,7 @@ class CreateArea extends React.Component {
                 <div className="imagesGrid">
                     {images}
                 </div>
-                <button className="cancelButton" onClick={() => this.props.openModalCancel(true)}>Supprimer</button>
+                <button className="cancelButton" onClick={() => this.cancelCreation()}>Supprimer</button>
                 {this.state.area.cities.length > 0? <button  className="saveButton" onClick={() => this.saveArea()}>Sauvegarder</button>: ''}
             </div>
         )

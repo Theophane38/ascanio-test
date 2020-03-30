@@ -25,6 +25,7 @@
 }
 .App table {
   width: 100%;
+  font-size: 12px;;
   border: 1px solid #ddd;
 }
 .App table thead {
@@ -45,6 +46,24 @@
 }
 .App table tr td li {
   list-style: none;
+}
+.App table tr td.cities {
+}
+.App table tr td.description {
+  font-size: 10px;
+}
+.App table tr td.actions svg {
+  font-size: 15px;
+  margin: 0 5px;
+  color: #444;
+}
+.App table tr td.actions svg:hover {
+  color: #2ac0cc;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.App table tr td.actions svg.fa-trash-alt:hover {
+  color: red;
 }
 .createAreaButton {
   margin: auto;
