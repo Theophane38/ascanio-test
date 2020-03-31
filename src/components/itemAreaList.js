@@ -16,6 +16,10 @@ class ItemAreaList extends React.Component {
         this.props.history.push('/editArea/' + this.props.id)
     }
 
+    display(){
+        this.props.history.push('/displayArea/' + this.props.id)
+    }
+
     render(){
         let {area} = this.props
         let listCities = []
@@ -33,7 +37,7 @@ class ItemAreaList extends React.Component {
                     </ul>
                 </td>
                 <td className="description">{`${area.description.substring(0,100)}${area.description.length > 100? '[...]' : ''}`}</td>
-                <td><button>Afficher</button></td>
+                <td className="display"><button onClick={() => this.display()}>Afficher</button></td>
                 <td className="actions"><FontAwesomeIcon onClick={() => this.edit()} icon={faEdit}/><FontAwesomeIcon onClick={() => this.props.deleteArea(this.props.id)} icon={faTrashAlt}/></td>
             </tr>
         )

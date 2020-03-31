@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Home from './components/home'
 import CreateArea from './components/createArea'
+import DisplayArea from './components/displayArea'
 import Modal from './components/modal'
 import {
   BrowserRouter as Router,
@@ -15,16 +16,63 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      idDeletingArea: null,
       areas: [{
         name: 'Isère',
-        cities: ['Grenoble', 'Meylan', 'Saint Martin d\'Hères'],
         description: 'Pellentesque sed tellus sed sapien auctor volutpat. Curabitur imperdiet ex tortor, in vulputate mi scelerisque nec. Quisque neque ex, ornare eu tempus id, pellentesque quis felis. Curabitur eget ultricies mi, non congue orci. Phasellus id augue eget libero finibus varius sit amet ac quam. Pellentesque ipsum eros, mattis sagittis mauris id, condimentum laoreet nibh. Proin porttitor, erat ut dapibus aliquet, odio sapien commodo tellus, eu tincidunt mi ex dapibus arcu. Nullam volutpat dui quis enim convallis bibendum. Cras egestas vitae elit sed dignissim. Phasellus non semper nulla. Sed id purus blandit, rhoncus libero accumsan, tristique ligula. Nulla fringilla nibh non pretium fermentum. Sed viverra, massa sed tempor egestas, elit arcu malesuada urna, ut fringilla lectus elit eget leo. Ut metus nisi, vulputate ut hendrerit eu, semper eu massa. Praesent fermentum sem et est scelerisque tincidunt. Praesent lacinia mattis gravida.        ',
-        images: []
+        cities: ['Grenoble', 'Meylan', 'Saint Martin d\'Hères'],
+        images: [{
+          city:"Saint-Maixent-de-Beugné",
+          url:"https://i.picsum.photos/id/70/180/180.jpg"
+        },{
+          city: "Saint-Maixent-de-Beugné",
+          url: "https://i.picsum.photos/id/84/180/180.jpg"
+        },{
+          city: "Saint-Maixent-de-Beugné",
+          url: "https://i.picsum.photos/id/981/180/180.jpg"
+        },{
+          "city":"Saint-Maixent-de-Beugné",
+          "url":"https://i.picsum.photos/id/21/180/180.jpg"
+        },{
+          "city":"Saint-Maixent-de-Beugné",
+          "url":"https://i.picsum.photos/id/114/180/180.jpg"
+        },{
+          "city":"Bourlens",
+          "url":"https://i.picsum.photos/id/387/180/180.jpg"
+        },{
+          "city":"Bourlens"
+          ,"url":"https://i.picsum.photos/id/53/180/180.jpg"
+        },{
+          "city":"Bourlens",
+          "url":"https://i.picsum.photos/id/533/180/180.jpg"
+        },{
+          "city":"Bourlens",
+          "url":"https://i.picsum.photos/id/456/180/180.jpg"
+        },{
+          "city":"Bourlens",
+          "url":"https://i.picsum.photos/id/366/180/180.jpg"
+        },{
+          "city":"Heiltz-le-Hutier",
+          "url":"https://i.picsum.photos/id/1001/180/180.jpg"
+        },{
+          "city":"Heiltz-le-Hutier",
+          "url":"https://i.picsum.photos/id/557/180/180.jpg"
+        },{
+          "city":"Heiltz-le-Hutier",
+          "url":"https://i.picsum.photos/id/1029/180/180.jpg"
+        },{
+          "city":"Heiltz-le-Hutier",
+          "url":"https://i.picsum.photos/id/500/180/180.jpg"
+        },{
+          "city":"Heiltz-le-Hutier",
+          "url":"https://i.picsum.photos/id/961/180/180.jpg"
+        }]
       }]
     }
     this.addArea = this.addArea.bind(this)
     this.deleteArea = this.deleteArea.bind(this)
     this.openModalCancel = this.openModalCancel.bind(this)
+    this.openModalDelete = this.openModalDelete.bind(this)
     this.generateRandomArea = this.generateRandomArea.bind(this)
   }
   
@@ -46,7 +94,8 @@ class App extends React.Component {
     let {areas} = this.state
     areas.splice(id, 1)
     this.setState({
-      areas
+      areas,
+      modalDelete: false,
     })
   }
 
@@ -57,7 +106,15 @@ class App extends React.Component {
     })
   }
 
-  discarArea(){
+  openModalDelete(value, id){
+    console.log(value)
+    this.setState({
+        modalDelete: value,
+        idDeletingArea: id
+    })
+  }
+
+  discardArea(){
     localStorage.clear();
     this.setState({
       modalCancel: false
@@ -141,17 +198,32 @@ class App extends React.Component {
                 addArea={this.addArea}
                 initialAreas={this.state.areas}
                 openModalCancel={this.openModalCancel}
+                openModalDelete={this.openModalDelete}
+              />
+            </Route>
+            <Route exact path="/displayArea/:id">
+              <DisplayArea 
+                initialAreas={this.state.areas}
               />
             </Route>
           </Switch>
           </div>
           <div className={`modalBackGround  ${this.state.modalCancel? 'active' : ''}`}>
             <div className="modal">
-                <p>Êtes-vous sûr de vouloir surpprimer cette zone?</p>
+                <p>Toute modification sera predue, confirmer ?</p>
+                <button className="unconfirmButton" onClick={() => this.openModalCancel(false)}>Non</button>
                 <Link to="/">
-                    <button onClick={() => this.discarArea(false)}>Oui</button>
+                    <button className="confirmButton" onClick={() => this.discardArea()}>Oui</button>
                 </Link>
-                <button onClick={() => this.openModalCancel(false)}>Non</button>
+            </div>
+          </div>
+          <div className={`modalBackGround  ${this.state.modalDelete? 'active' : ''}`}>
+            <div className="modal">
+                <p>Êtes-vous sûr de vouloir surpprimer cette zone?</p>
+                <button className="unconfirmButton" onClick={() => this.openModalDelete(false)}>Non</button>
+                <Link to="/">
+                    <button className="confirmButton" onClick={() => this.deleteArea(this.state.idDeletingArea)}>Oui</button>
+                </Link>
             </div>
           </div>
         </div>

@@ -21,7 +21,8 @@
 .App .container {
   width: 1000px;
   margin: auto;
-  margin-top: 100px;;
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 .App .searchBar {
   margin-bottom: 10px;;
@@ -41,6 +42,18 @@
   margin-left: -22px;
   color: #fff;
   vertical-align: text-bottom;
+}
+.App .randomAreaButton {
+  margin: 0;
+  margin-bottom: 10px;
+  margin-top: -26px;
+  text-align: right;
+  color: #fabb3a;
+  font-size: 12px;
+  cursor: pointer;
+}
+.App .randomAreaButton:hover {
+  text-decoration: underline;
 }
 .App table {
   width: 100%;
@@ -70,6 +83,21 @@
 }
 .App table tr td.description {
   font-size: 10px;
+}
+.App table tr td.display button {
+  color: #fabb3a;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.App table tr td.display button:hover {
+  transition: 0.6s;
+  background-color: #fabb3a;
+  color: #fff;
+}
+.App table tr td.display button:focus {
+  outline: none;
 }
 .App table tr td.actions svg {
   font-size: 15px;
@@ -191,6 +219,21 @@
   background-color: #bbb;
   transition: 0.3s;
 }
+.createArea .deleteButton {
+  position: absolute;
+  left: 80px;
+  bottom: 20px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.createArea .deleteButton:hover {
+  background-color: red;
+  transition: 0.3s;
+}
 .createArea .saveButton {
   position: absolute;
   right: 0px;
@@ -228,6 +271,35 @@
   padding: 10px 0;
   background-color: #fff;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  padding: 20px 20px 40px 20px;
+}
+.modalBackGround .modal button.confirmButton {
+  position: absolute;
+  right: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: #fabb3a;
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: #fff;
+}
+.modalBackGround .modal button.confirmButton:hover {
+  background-color: #EEB339;
+  transition: 0.3s;
+}
+.modalBackGround .modal button.unconfirmButton {
+  position: absolute;
+  left: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: #ddd;
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: #fff;
+}
+.modalBackGround .modal button.unconfirmButton:hover {
+  background-color: #ccc;
+  transition: 0.3s;
 }
 .containerForm {
   padding: 30px 0;
@@ -255,4 +327,40 @@
 }
 .containerForm textarea:focus {
   border: #2ac0cc solid 0.5px;
+}
+.displayArea h3 {
+  text-align: center;
+}
+.displayArea .description {
+  text-align: justify;
+}
+.displayArea ul {
+  margin: 0;
+  padding: 0;
+  margin: 20px 0;
+}
+.displayArea li {
+  display: inline-block;
+  position: relative;
+  padding: 3px 30px;
+  background-color: #2ac0cc;
+  margin: 0 10px;
+  color: #fff;
+  border-radius: 50px;
+}
+.displayArea li:first-child{
+  margin-left: 0
+}
+.displayArea .imagesGrid {
+  line-height: 0;
+}
+.displayArea .image {
+  width: calc(20% - 4px);
+  display: inline-block;
+  line-height: 0;
+  margin: 2px;
+}
+.displayArea img {
+  line-height: 0;
+  width: 100%;
 }

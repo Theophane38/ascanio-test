@@ -27,14 +27,15 @@ class CreateArea extends React.Component {
     componentWillMount(){
         if (this.props.match.path !== '/createArea'){
             if (typeof this.props.initialAreas[this.props.match.params.id] !== 'undefined'){
-                const draftArea = Object.assign({}, this.props.initialAreas[this.props.match.params.id])
+                const initialArea = Object.assign({}, this.props.initialAreas[this.props.match.params.id])
                 let area = {}
-                area.name = draftArea.name
-                area.description = draftArea.description
-                area.cities = draftArea.cities.slice(0)
-                area.images = draftArea.images.slice(0)
+                area.name = initialArea.name
+                area.description = initialArea.description
+                area.cities = initialArea.cities.slice(0)
+                area.images = initialArea.images.slice(0)
                 this.setState({
-                    area
+                    area,
+                    initialArea
                 })
             } else {
                 this.props.history.push('/')
@@ -134,10 +135,16 @@ class CreateArea extends React.Component {
         }
     }
 
+    deleteCreation(){
+        this.props.openModalDelete(true, this.props.match.params.id)
+    }
+
     cancelCreation(){
-        console.log(this.state.area.name, this.state.area.description, this.state.area.cities.length)
-        if (this.state.area.name === '' && this.state.area.description === '' && this.state.area.cities.length === 0){
-            console.log('a')
+        console.log(JSON.stringify(this.state.area))
+        console.log(JSON.stringify(this.state.initialArea))
+        if (
+        JSON.stringify(this.state.area) === JSON.stringify(this.state.initialArea)
+        || (this.state.area.name === '' && this.state.area.description === '' && this.state.area.cities.length === 0)){
             this.props.history.push('/')
         } else {
             this.props.openModalCancel(true)
@@ -199,7 +206,8 @@ class CreateArea extends React.Component {
                 <div className="imagesGrid">
                     {images}
                 </div>
-                <button className="cancelButton" onClick={() => this.cancelCreation()}>Supprimer</button>
+                {typeof this.props.match.params.id !== 'undefined'?<button className="deleteButton" onClick={() => this.deleteCreation()}>Supprimer</button>: ''}
+                <button className="cancelButton" onClick={() => this.cancelCreation()}>Annuler</button>
                 {this.state.area.cities.length > 0? <button  className="saveButton" onClick={() => this.saveArea()}>Sauvegarder</button>: ''}
             </div>
         )
