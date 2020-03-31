@@ -30,6 +30,7 @@ class Home extends React.Component {
                 if (areas[i].name.toUpperCase().indexOf(this.state.searchValue.toUpperCase()) > -1){
                     myList.push(
                         <ItemAreaList id={i} 
+                            openModalDelete={this.props.openModalDelete}
                             editArea={this.props.editArea}
                             deleteArea={this.props.deleteArea}
                             area={areas[i]}

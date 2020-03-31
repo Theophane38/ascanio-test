@@ -38,7 +38,7 @@ class ItemAreaList extends React.Component {
                 </td>
                 <td className="description">{`${area.description.substring(0,100)}${area.description.length > 100? '[...]' : ''}`}</td>
                 <td className="display"><button onClick={() => this.display()}>Afficher</button></td>
-                <td className="actions"><FontAwesomeIcon onClick={() => this.edit()} icon={faEdit}/><FontAwesomeIcon onClick={() => this.props.deleteArea(this.props.id)} icon={faTrashAlt}/></td>
+                <td className="actions"><FontAwesomeIcon onClick={() => this.edit()} icon={faEdit}/><FontAwesomeIcon onClick={() => this.props.openModalDelete(true, this.props.id)} icon={faTrashAlt}/></td>
             </tr>
         )
     }
