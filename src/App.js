@@ -16,57 +16,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       idDeletingArea: null,
-      areas: [{
-        name: 'Isère',
-        description: 'Pellentesque sed tellus sed sapien auctor volutpat. Curabitur imperdiet ex tortor, in vulputate mi scelerisque nec. Quisque neque ex, ornare eu tempus id, pellentesque quis felis. Curabitur eget ultricies mi, non congue orci. Phasellus id augue eget libero finibus varius sit amet ac quam. Pellentesque ipsum eros, mattis sagittis mauris id, condimentum laoreet nibh. Proin porttitor, erat ut dapibus aliquet, odio sapien commodo tellus, eu tincidunt mi ex dapibus arcu. Nullam volutpat dui quis enim convallis bibendum. Cras egestas vitae elit sed dignissim. Phasellus non semper nulla. Sed id purus blandit, rhoncus libero accumsan, tristique ligula. Nulla fringilla nibh non pretium fermentum. Sed viverra, massa sed tempor egestas, elit arcu malesuada urna, ut fringilla lectus elit eget leo. Ut metus nisi, vulputate ut hendrerit eu, semper eu massa. Praesent fermentum sem et est scelerisque tincidunt. Praesent lacinia mattis gravida.        ',
-        cities: ['Grenoble', 'Meylan', 'Saint Martin d\'Hères'],
-        images: [{
-          city:"Grenoble",
-          url:"https://i.picsum.photos/id/70/180/180.jpg"
-        },{
-          city:"Grenoble",
-          url: "https://i.picsum.photos/id/84/180/180.jpg"
-        },{
-          city:"Grenoble",
-          url: "https://i.picsum.photos/id/981/180/180.jpg"
-        },{
-          city:"Grenoble",
-          url:"https://i.picsum.photos/id/21/180/180.jpg"
-        },{
-          city:"Grenoble",
-          url:"https://i.picsum.photos/id/114/180/180.jpg"
-        },{
-          city:"Meylan",
-          url:"https://i.picsum.photos/id/387/180/180.jpg"
-        },{
-          city:"Meylan",
-          url:"https://i.picsum.photos/id/53/180/180.jpg"
-        },{
-          city:"Meylan",
-          url:"https://i.picsum.photos/id/533/180/180.jpg"
-        },{
-          city:"Meylan",
-          url:"https://i.picsum.photos/id/456/180/180.jpg"
-        },{
-          city:"Meylan",
-          url:"https://i.picsum.photos/id/366/180/180.jpg"
-        },{
-          city:"Saint Martin d'Hères",
-          url:"https://i.picsum.photos/id/1001/180/180.jpg"
-        },{
-          city:"Saint Martin d'Hères",
-          url:"https://i.picsum.photos/id/557/180/180.jpg"
-        },{
-          city:"Saint Martin d'Hères",
-          url:"https://i.picsum.photos/id/1029/180/180.jpg"
-        },{
-          city:"Saint Martin d'Hères",
-          url:"https://i.picsum.photos/id/500/180/180.jpg"
-        },{
-          city:"Saint Martin d'Hères",
-          url:"https://i.picsum.photos/id/961/180/180.jpg"
-        }]
-      }]
+      areas: []
     }
     this.addArea = this.addArea.bind(this)
     this.deleteArea = this.deleteArea.bind(this)
