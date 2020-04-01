@@ -16,13 +16,29 @@ class App extends React.Component {
     super(props)
     this.state = {
       idDeletingArea: null,
-      areas: []
+      areas: [],
+      jokes: [],
+      currentJoke: ''
     }
     this.addArea = this.addArea.bind(this)
     this.deleteArea = this.deleteArea.bind(this)
     this.openModalCancel = this.openModalCancel.bind(this)
     this.openModalDelete = this.openModalDelete.bind(this)
     this.generateRandomArea = this.generateRandomArea.bind(this)
+  }
+
+  componentDidMount(){
+    fetch(`https://bridge.buddyweb.fr/api/blagues/blagues`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+        this.setState({
+          jokes: data
+        })
+    })
+    .catch(error => {
+        console.log(error)
+    });
   }
   
 
@@ -87,6 +103,25 @@ class App extends React.Component {
     return Promise.all([this.getRandomWord(), this.getRandomParagraph(), this.getRandomCities()])
   }
 
+  openModalJoke(){
+    this.setState({
+      currentJoke: this.state.jokes[Math.floor(Math.random() * this.state.jokes.length)].blagues,
+      modalJoke: true
+    })
+  }
+
+  closeJoke(){
+    this.setState({
+      modalJoke: false
+    })
+  }
+
+  getAnOtherJoke(){
+    this.setState({
+      currentJoke: this.state.jokes[Math.floor(Math.random() * this.state.jokes.length)].blagues
+    })
+  }
+
   generateRandomArea(){
     let {areas} = this.state
     this.getRandomDatas()
@@ -122,36 +157,44 @@ class App extends React.Component {
         <div className="App">
           <h1><span>Pimp</span><span>My</span><span>Zone</span></h1>
           <div className="container">
-          <Switch>
-            <Route exact path="/">
-              <Home 
-                editArea={this.editArea}
-                generateRandomArea={this.generateRandomArea}
-                deleteArea={this.deleteArea}
-                areas={this.state.areas}
-                openModalDelete={this.openModalDelete}
-              />
-            </Route>
-            <Route exact path="/createArea">
-              <CreateArea 
-                addArea={this.addArea}
-                openModalCancel={this.openModalCancel}
-              />
-            </Route>
-            <Route exact path="/editArea/:id">
-              <CreateArea 
-                addArea={this.addArea}
-                initialAreas={this.state.areas}
-                openModalCancel={this.openModalCancel}
-                openModalDelete={this.openModalDelete}
-              />
-            </Route>
-            <Route exact path="/displayArea/:id">
-              <DisplayArea 
-                initialAreas={this.state.areas}
-              />
-            </Route>
-          </Switch>
+            <Switch>
+              <Route exact path="/">
+                <Home 
+                  editArea={this.editArea}
+                  generateRandomArea={this.generateRandomArea}
+                  deleteArea={this.deleteArea}
+                  areas={this.state.areas}
+                  openModalDelete={this.openModalDelete}
+                />
+              </Route>
+              <Route exact path="/createArea">
+                <CreateArea 
+                  addArea={this.addArea}
+                  openModalCancel={this.openModalCancel}
+                />
+              </Route>
+              <Route exact path="/editArea/:id">
+                <CreateArea 
+                  addArea={this.addArea}
+                  initialAreas={this.state.areas}
+                  openModalCancel={this.openModalCancel}
+                  openModalDelete={this.openModalDelete}
+                />
+              </Route>
+              <Route exact path="/displayArea/:id">
+                <DisplayArea 
+                  initialAreas={this.state.areas}
+                />
+              </Route>
+            </Switch>
+          </div>
+          <div className={`modalBackGround  ${this.state.modalJoke? 'active' : ''}`}>
+            <div className="modal jokeModal">
+                <p className="info">Désolé si cette blague est de mauvais goût, elle n'est pas de moi...</p>
+                <p>{this.state.currentJoke}</p>
+                <button className="unconfirmButton" onClick={() => this.closeJoke()}>Fermer</button>
+                <button className="confirmButton" onClick={() => this.getAnOtherJoke()}>Une autre !</button>
+            </div>
           </div>
           <div className={`modalBackGround  ${this.state.modalCancel? 'active' : ''}`}>
             <div className="modal">
@@ -171,7 +214,10 @@ class App extends React.Component {
                 </Link>
             </div>
           </div>
-          <footer>Créé par <a target="_blank" href="http://theophane-duval.ovh/">Théophane Duval</a></footer>
+          <footer>
+            <p>Créé par <a target="_blank" href="http://theophane-duval.ovh/">Théophane Duval</a></p>
+            <p className="joke">C'est le premier avril, <button onClick={() => this.openModalJoke()}>je veux une blague</button> !</p>
+          </footer>
         </div>
       </Router>
     )

@@ -368,15 +368,56 @@ footer {
   background-color: #444;
   position: fixed;
   bottom: 0;
-  width: 100%;
-  color: #fff;
+  width: calc(100% - 10px);
   padding: 5px;
-  font-size: 10px;;
+}
+footer p {
+  font-size: 10px;
+  margin: 0;
+  color: #fff;
 }
 footer a {
   color: #fff;
   font-weight: bold;
   text-decoration: none;
+}
+footer .joke {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+footer button {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  background-color: rgba(0,0,0,0);
+  font-size: 10px;
+  cursor: pointer;
+  color: hsl(324, 70%, 45%);
+  animation: wheelHueColor 3s infinite;
+}
+.joke h3 {
+  color: hsl(324, 70%, 45%);
+  animation: wheelHueColor 3s infinite;
+}
+.modalBackGround .jokeModal {
+  top: 10px;
+}
+.modalBackGround .jokeModal .info {
+  font-size: 10px;
+}
+@keyframes wheelHueColor {
+  from, to { color: hsl(324, 70%, 45%); }
+  10%      { color: hsl(360, 65%, 45%); }
+  20%      { color: hsl( 36, 80%, 45%); }
+  30%      { color: hsl( 72, 75%, 35%); }
+  40%      { color: hsl(108, 65%, 35%); }
+  50%      { color: hsl(144, 75%, 35%); }
+  60%      { color: hsl(180, 75%, 35%); }
+  70%      { color: hsl(216, 60%, 45%); }
+  80%      { color: hsl(252, 65%, 50%); }
+  90%      { color: hsl(288, 60%, 40%); }
 }
 @media screen and (max-width: 1000px) {
   .App h1 {

@@ -48,7 +48,7 @@ class Home extends React.Component {
         } else {
             myList.push(
                 <tr>
-                    <td colSpan={5}>Vous n'avez créé aucune zone.</td>
+                    <td key="NoArea" colSpan={5}>Vous n'avez créé aucune zone.</td>
                 </tr>
             )
         }
