@@ -14,17 +14,12 @@ class DynamicCitySearch extends React.Component {
         this.setFocus = this.setFocus.bind(this)
     }
 
-    componentWillMount(){
-
-    }
-
     handleChange(event){
         const matchingCities = []
         let value = event.target.value
         this.setState({
             valueSearchBar: value
         })
-        console.log(matchingCities)
         fetch(`https://geo.api.gouv.fr/communes?fields=nom,population&boost=population&nom=${value}`)
         .then(response => response.json())
         .then(data => {
@@ -39,7 +34,6 @@ class DynamicCitySearch extends React.Component {
                     matchingCities.push(data[i].nom)
                 }
             }
-            console.log(matchingCities)
             this.setState({
                 matchingCities
             })
@@ -73,8 +67,8 @@ class DynamicCitySearch extends React.Component {
         }
         return (
             <form>
-                <div class="searchCity">
-                    <input onFocus={() => this.setFocus(true)}  onBlur={() => this.setFocus(false)} placeHolder='Ville' value={this.state.valueSearchBar} onChange={this.handleChange}/>
+                <div className="searchCity">
+                    <input onFocus={() => this.setFocus(true)}  onBlur={() => this.setFocus(false)} placeholder='Ville' value={this.state.valueSearchBar} onChange={this.handleChange}/>
                     
                     {this.state.focusedSearchBar? <div className="listMatchingCities">
                         {optionsCities}

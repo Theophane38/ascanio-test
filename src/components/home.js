@@ -29,7 +29,8 @@ class Home extends React.Component {
             for(let i = 0; i < areas.length; i++) {
                 if (areas[i].name.toUpperCase().indexOf(this.state.searchValue.toUpperCase()) > -1){
                     myList.push(
-                        <ItemAreaList id={i} 
+                        <ItemAreaList id={i}
+                            key={'area' + i}
                             openModalDelete={this.props.openModalDelete}
                             editArea={this.props.editArea}
                             deleteArea={this.props.deleteArea}
@@ -58,7 +59,7 @@ class Home extends React.Component {
                     <input type='text' onChange={this.handleChangeSearch} placeholder="Chercher une zone"/><FontAwesomeIcon icon={faSearch}/>
                 </div>
                 <p className='randomAreaButton' onClick={() => this.props.generateRandomArea()}>Générer une zone aléatoire.</p>
-                <table cellspacing="0" cellpadding="0">
+                <table cellSpacing="0" cellPadding="0">
                     <thead>
                         <tr>
                             <td>Nom de la zone</td>

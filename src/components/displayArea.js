@@ -1,14 +1,21 @@
 import React from 'react';
-import DynamicCitySearch from './dynamicCitySearch'
-import {Link, withRouter, useParams} from "react-router-dom"
+import {withRouter} from "react-router-dom"
 
 class DisplayArea extends React.Component {
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
+        this.state = {
+            area: {
+                name: '',
+                description: '',
+                cities: [],
+                images: []
+            }
+        }
     }
 
-    componentWillMount(){
+    componentDidMount(){
         if (typeof this.props.initialAreas[this.props.match.params.id] !== 'undefined'){
             this.setState({
                 area: this.props.initialAreas[this.props.match.params.id]
@@ -24,15 +31,15 @@ class DisplayArea extends React.Component {
 
         for (let i = 0; i < this.state.area.images.length; i++){
             images.push(
-                <div className="image" onDrop={this.drop} onDragOver={this.allowDrop}>
-                    <img id={i} src={this.state.area.images[i].url}/>
+                <div key={'image'+i} className="image" onDrop={this.drop} onDragOver={this.allowDrop}>
+                    <img alt={'image of ' + this.state.area.images.city} id={i} src={this.state.area.images[i].url}/>
                 </div>
             )
         }
         
         for (let i = 0; i < this.state.area.cities.length; i++){
             cities.push(
-                <li>{this.state.area.cities[i]}</li>
+                <li key={this.state.area.cities[i]}>{this.state.area.cities[i]}</li>
             )
         }
         return (

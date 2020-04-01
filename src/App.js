@@ -51,19 +51,19 @@ class App extends React.Component {
           city:"Meylan",
           url:"https://i.picsum.photos/id/366/180/180.jpg"
         },{
-          city:"Saint Martin d\'Hères",
+          city:"Saint Martin d'Hères",
           url:"https://i.picsum.photos/id/1001/180/180.jpg"
         },{
-          city:"Saint Martin d\'Hères",
+          city:"Saint Martin d'Hères",
           url:"https://i.picsum.photos/id/557/180/180.jpg"
         },{
-          city:"Saint Martin d\'Hères",
+          city:"Saint Martin d'Hères",
           url:"https://i.picsum.photos/id/1029/180/180.jpg"
         },{
-          city:"Saint Martin d\'Hères",
+          city:"Saint Martin d'Hères",
           url:"https://i.picsum.photos/id/500/180/180.jpg"
         },{
-          city:"Saint Martin d\'Hères",
+          city:"Saint Martin d'Hères",
           url:"https://i.picsum.photos/id/961/180/180.jpg"
         }]
       }]
@@ -94,6 +94,7 @@ class App extends React.Component {
     this.setState({
       areas,
       modalDelete: false,
+      idDeletingArea: null
     })
   }
   
@@ -105,14 +106,12 @@ class App extends React.Component {
   }
 
   openModalCancel(value){
-    console.log(value)
     this.setState({
         modalCancel: value
     })
   }
 
   openModalDelete(value, id){
-    console.log(value)
     this.setState({
         modalDelete: value,
         idDeletingArea: id
@@ -170,9 +169,6 @@ class App extends React.Component {
   render (){
     return(
       <Router>
-        {/* <Modal>
-          <p>Salut</p>
-        </Modal> */}
         <div className="App">
           <h1><span>Pimp</span><span>My</span><span>Zone</span></h1>
           <div className="container">
@@ -225,6 +221,7 @@ class App extends React.Component {
                 </Link>
             </div>
           </div>
+          <footer>Créé par <a target="_blank" href="http://theophane-duval.ovh/">Théophane Duval</a></footer>
         </div>
       </Router>
     )

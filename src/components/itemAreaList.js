@@ -1,16 +1,11 @@
 import React from 'react';
-import CreateCity from './createArea'
-import {Link, withRouter} from "react-router-dom"
+import {withRouter} from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 
 class ItemAreaList extends React.Component {
-
-    constructor(props){
-        super(props)
-    }
 
     edit(){
         this.props.history.push('/editArea/' + this.props.id)
@@ -25,7 +20,7 @@ class ItemAreaList extends React.Component {
         let listCities = []
 
         for (let i = 0; i < area.cities.length; i++){
-            listCities.push(<li>{area.cities[i]}</li>)
+            listCities.push(<li key={'city'+i}>{area.cities[i]}</li>)
         }
 
         return (
